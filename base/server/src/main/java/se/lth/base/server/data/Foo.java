@@ -12,17 +12,24 @@ public class Foo {
     private final int userId;
     private final String payload;
     private final long created;
+    private final int total;
 
-    public Foo(int id, int userId, String payload, long created) {
+    public Foo(int id, int userId, String payload, long created, int total) {
         this.id = id;
         this.userId = userId;
         this.payload = payload;
         this.created = created;
+        this.total = total;
     }
 
     public int getId() {
         return id;
     }
+
+    public int getTotal() {
+        return total;
+    }
+
 
     public int getUserId() {
         return userId;
