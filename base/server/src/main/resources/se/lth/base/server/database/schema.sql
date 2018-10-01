@@ -47,8 +47,6 @@ CREATE TABLE foo(
     -- user_id is the third column with type INT. This keeps track of who the user is, so that each user has their own
     -- foos only.
 
-    total INT NOT NULL DEFAULT 1,
-
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP() NOT NULL,
     -- created is the fourth and final column with type TIMESTAMP. This column also has a default value
     -- which is created by the function CURRENT_TIMESTAMP() if not supplied during creation.
@@ -59,8 +57,7 @@ CREATE TABLE foo(
     -- This defines foo_id as the unique identifier of the table. It adds NOT NULL to the column and
     -- enforces that the values rows all have a unique identifier.
 
-    FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE,
-    CHECK (total > 0)
+    FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE
     -- This informs that the column user_id is a relation to another table's primary key. In combination
     -- with the NOT NULL constraint above it is not possible to enter data that is not connected to a user.
     -- Note that there can be multiple rows with the same user_id (but the foo_id is unique for each row).
