@@ -6,6 +6,3 @@ The second comand runs the program.
 
 mvn verify
 mvn exec:java -Dexec.mainClass="se.lth.base.server.BaseServer"
-
-hejsan
-igen
