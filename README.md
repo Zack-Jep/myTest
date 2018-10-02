@@ -1,10 +1,10 @@
 # largesofteng
 Course material for the course "Large-Scale Software Engineering".
 
-cd to POM.xml. Then run the commands below. The first one builds the project.
-The second comand runs the program.
-
 ## Maven commands
+
+All the commands need to be executed in the same directory as the _POM.xml_
+file.
 
 - `mvn compile`
   - Compile the source code of the project
