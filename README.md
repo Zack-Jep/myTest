@@ -11,6 +11,7 @@ For windows users:
 Download maven for windows @ https://maven.apache.org/download.cgi
 Under Files -> Binary Zip archive.
 Extract to C:/
+
 Control panel -> Search for "environment variables" -> Edit the system environment variables -> Environment Variables
 In the lower list, select "Path" and edit. 
 New -> C:\apache-maven-3.5.4\bin
@@ -20,7 +21,7 @@ open cmd, check that you can use the command: mvn --version
 Try running java -version, if it doesn't work. Check that you also have a java JDK in your environment variable Path. If you don't, download a JDK from https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
 java SE Development Kit -> windows x64 or x86 depending on your system.
-Install, then follow the steps above and do the same thing for the JDK.
+Install, then follow the steps above to add the JDK to  your environment variable.
 The JDK is usually located under C:\Program Files\Java (unless you changed it) and the path should be:
 C:\Program Files\Java\jdk1.8.0_181\bin
 
@@ -32,11 +33,13 @@ cd C:\Users\Gustav\Software\Java\ETSN\etsn05-samakning\base\server
 mvn verify && mvn exec:java -Dexec.mainClass="se.lth.base.server.BaseServer"
 
 If you don't want to do this manually every time. Create a new txt file and add the following (remember to change PATH_TO_FOLDER). Then change the file extension to .bat (mine is called runETSN.bat)
+
 @echo off
 cd C:\PATH_TO_FOLDER\etsn05-samakning\base\server
 mvn verify && mvn exec:java -Dexec.mainClass="se.lth.base.server.BaseServer"
 
-! if you don't use version 8 of the JDK you'll have to add the following dependencies in the pom.xml.
+If you don't use version 8 of the JDK you'll have to add the following dependencies in the pom.xml.
+
         <dependency>
         <groupId>javax.activation</groupId>
         <artifactId>activation</artifactId>
