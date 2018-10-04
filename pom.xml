@@ -117,6 +117,25 @@
                 </executions>
             </plugin>
 
+            <plugin>
+              <groupId>com.coveo</groupId>
+              <artifactId>fmt-maven-plugin</artifactId>
+              <version>2.5.1</version>
+              <configuration>
+                <sourceDirectory>src/main/java</sourceDirectory>
+                <testSourceDirectory>src/test</testSourceDirectory>
+                <verbose>true</verbose>
+                <style>google</style>
+              </configuration>
+              <executions>
+                <execution>
+                  <goals>
+                    <goal>format</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+
         </plugins>
     </build>
 
