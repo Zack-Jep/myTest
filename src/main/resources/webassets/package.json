@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "fmt:check": "find . -name '*js' | grep -v '^./node_modules/' | xargs ./node_modules/.bin/prettier -l",
+    "fmt:format": "find . -name '*js' | grep -v '^./node_modules/' | xargs ./node_modules/.bin/prettier --write"
+  },
+  "devDependencies": {
+    "prettier": "^1.14.3"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "singleQuote": true
+  }
+}
