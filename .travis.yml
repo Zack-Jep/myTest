@@ -22,7 +22,7 @@ matrix:
       install:
         - cd src/main/resources/webassets
         - yarn install
-      script: yarn check-format
+      script: yarn fmt:check
 
     - name: "Front-end unit tets"
       language: node_js
@@ -35,4 +35,4 @@ matrix:
       install:
         - cd src/main/resources/webassets
         - yarn install
-      script: yarn test
+      script: yarn test:ci

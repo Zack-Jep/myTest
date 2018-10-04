@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "test": "testem ci",
+    "test:dev": "testem",
+    "test:ci": "testem ci",
     "fmt:check": "find . -name '*js' | grep -v '^./node_modules/' | xargs ./node_modules/.bin/prettier -l",
     "fmt:format": "find . -name '*js' | grep -v '^./node_modules/' | xargs ./node_modules/.bin/prettier --write"
   },

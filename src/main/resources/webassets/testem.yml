@@ -1,6 +1,6 @@
 framework: jasmine
 test_page: specs.html
 launch_in_dev:
-  - Headless Chrome
+  - Chrome
 launch_in_ci:
   - Headless Chrome
