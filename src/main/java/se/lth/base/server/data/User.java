@@ -9,6 +9,8 @@ public class User implements Principal {
   private final int id;
   private final Role role;
   private final String username;
+  private double rating;
+  private int totalRatings = 0;
 
   public User(int id, Role role, String username) {
     this.id = id;
@@ -23,6 +25,16 @@ public class User implements Principal {
   public int getId() {
     return id;
   }
+  
+  /**Updates the average rating of a user.
+   * @param r Rating input from frontend. 
+   *  */
+  public void ratingChange(int r) {
+	  rating = (totalRatings*rating + r)/(totalRatings + 1);
+	  totalRatings++;
+	  return;
+  }
+ 
 
   @Override
   public String getName() {
