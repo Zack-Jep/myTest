@@ -62,7 +62,7 @@ public class SearchHandler {
 	 * @return true or false
 	 */
 	private boolean checkCapacity(Trip t) {
-		return t.getCapacity > 0; 
+		return t.emptyCapacity > 0; 
 	}
 	
 	
