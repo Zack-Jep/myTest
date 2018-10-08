@@ -61,5 +61,24 @@ public class SearchHandler {
 	    return jsonArray.get(0);
 	}
 	
+	private boolean compareStart(double lat1, double lon1, double lat2, double lon2) {
+		
+		return false;
+	}
+	private double haversine(double lat1, double lon1, double lat2, double lon2) {
+		int R = 6371e3; // metres
+		double φ1 = Math.toRadians(lat1);
+		var φ2 = Math.toRadians(lat2);
+		var Δφ = (lat2-lat1).toRadians();
+		var Δλ = (lon2-lon1).toRadians();
+
+		var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+		        Math.cos(φ1) * Math.cos(φ2) *
+		        Math.sin(Δλ/2) * Math.sin(Δλ/2);
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+		var d = R * c;
+	}
+	
 }
 
