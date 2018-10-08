@@ -22,32 +22,58 @@ import se.lth.base.server.rest.providers.JsonProvider;
 
 public class SearchHandler {
 
-	private static final double ENDRADIUS = 10;
+	private static final double ENDRADIUS = 5;
 	
-	public static void main(String[] args) throws Exception{
-		System.out.println(search("Spolegatan+15", 15, new TripDataAccess()));
-	}
 	
 	/** Returns a list of Trips that are within the specified radius.
 	 * @param radius The radius specified on frontend.
 	 * @param startAdress Adress specified on frontend.
 	 * @return List of Trips.
 	 * */
-	public static List<Trip> search(String startAdress, 
+	public static List<Trip> search(String startAdress, String endAdress, 
 		double radius, TripDataAccess tripDao) {
+		List<Trip> matchedTrips = new ArrayList<Trip>();
 		JsonObject json = (JsonObject) getJson(startAdress);
-	    double userLat = ((JsonObject) json).get("lat").getAsDouble();
-	    double userLon = ((JsonObject) json).get("lon").getAsDouble();
-	    
-	    
+	    double userStartLat = ((JsonObject) json).get("lat").getAsDouble();
+	    double userStartLon = ((JsonObject) json).get("lon").getAsDouble();
+	    json = (JsonObject) getJson(endAdress);
+	    double userEndLat = ((JsonObject) json).get("lat").getAsDouble();
+	    double userEndLon = ((JsonObject) json).get("lon").getAsDouble();
+	 
 		List<Trip> allTrips = tripDao.getAllTrips();
 		for(int i = 0; i < allTrips.size(); i++) {
-			double lat = allTrips.get(i).getCoords().get(1);
-			double lon = allTrips.get(i).getCoords().get(2);
+			double startLat = allTrips.get(i).getCoords().get(1);
+			double startLon = allTrips.get(i).getCoords().get(2);
+			double endLat = allTrips.get(i).getCoords().get(3);
+			double endLon = allTrips.get(i).getCoords().get(4);
 			
-			
+			if (compareRating(allTrips.get(i)) && checkCapacity(allTrips.get(i)) && 
+					compareStart(userStartLat, userStartLon, startLat, startLon, radius) &&
+					compareEnd(userEndLat, userEndLon, endLat, endLon)) {
+				
+				for(int j = 0; j < matchedTrips.size(); j++) {
+					double startDistance = haversine(userStartLat, userStartLon, startLat,
+							startLon);
+					double endDistance = haversine(userEndLat, userEndLon, endLat,
+							endLon);
+					
+					double startMLat = matchedTrips.get(j).getCoords().get(1);
+					double startMLon = matchedTrips.get(j).getCoords().get(2);
+					double endMLat = matchedTrips.get(j).getCoords().get(3);
+					double endMLon = matchedTrips.get(j).getCoords().get(4);
+					double startMDistance = haversine(userStartLat, userStartLon, startMLat,
+							startMLon);
+					double endMDistance = haversine(userEndLat, userEndLon, endMLat,
+							endMLon);	
+					
+					if( (startMDistance + endMDistance) > (startDistance + endDistance)) {
+						matchedTrips.add(j, allTrips.get(i));
+						break;
+					}
+				}
+			}
 		}
-		return null;
+		return matchedTrips;
 	}
 	
 	
@@ -55,7 +81,7 @@ public class SearchHandler {
 	 * @param A trip t
 	 * @return true or false
 	 */
-	private boolean compareRating(Trip t) {
+	private static boolean compareRating(Trip t) {
 		return User.getRating >= t.getRatingRequired;
 	}
 	
@@ -63,7 +89,7 @@ public class SearchHandler {
 	 * @param A trip t
 	 * @return true or false
 	 */
-	private boolean checkCapacity(Trip t) {
+	private static boolean checkCapacity(Trip t) {
 		return t.emptyCapacity > 0; 
 	}
 	
@@ -81,13 +107,15 @@ public class SearchHandler {
 	    return jsonArray.get(0);
 	}
 	
-	private boolean compareStart(double lat1, double lon1, double lat2, double lon2, double r) {
+	private static boolean compareStart(double lat1, double lon1, double lat2, double lon2, double r) {
 		return (r > haversine(lat1, lon1, lat2, lon2));
 	}
 	
-	private boolean compareEnd(double lat1, double lon1, double lat2, double lon2, double r)
+	private static boolean compareEnd(double lat1, double lon1, double lat2, double lon2) {
+		return (ENDRADIUS > haversine(lat1, lon1, lat2, lon2));
+	}
 	
-	private double haversine(double lat1, double lon1, double lat2, double lon2) {
+	private static double haversine(double lat1, double lon1, double lat2, double lon2) {
 		int R = 6371;
 		double φ1 = Math.toRadians(lat1);
 		double φ2 = Math.toRadians(lat2);
