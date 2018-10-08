@@ -37,7 +37,7 @@ public class SearchHandler {
 	 * @return List of Trips.
 	 * */
 	public static List<Trip> search(String startAdress, 
-			double radius, TripDataAccess tripDao) {
+		double radius, TripDataAccess tripDao) {
 		JsonObject json = (JsonObject) getJson(startAdress);
 	    double userLat = ((JsonObject) json).get("lat").getAsDouble();
 	    double userLon = ((JsonObject) json).get("lon").getAsDouble();
@@ -52,6 +52,24 @@ public class SearchHandler {
 		}
 		return null;
 	}
+	
+	
+	/** Returns true if the User's rating qualifies for the trip.
+	 * @param A trip t
+	 * @return true or false
+	 */
+	private boolean compareRating(Trip t) {
+		return User.getRating >= t.getRatingRequired;
+	}
+	
+	/** Returns true if there is capacity available for the trip.
+	 * @param A trip t
+	 * @return true or false
+	 */
+	private boolean checkCapacity(Trip t) {
+		return t.emptyCapacity > 0; 
+	}
+	
 	
 	private static JsonElement getJson(String adress) throws IOException {
 		String urlString = "https://nominatim.openstreetmap.org/search?q="
@@ -70,7 +88,7 @@ public class SearchHandler {
      * @param departureTime The driver's departure time.
      * @param intervalStart The interval's start time.
      * @param intervalEnd The interval's end time
-     * @return true/false.
+     * @return true or false.
      * */
 	private boolean timeInInterval(String departureTime, String intervalStart, String intervalEnd){
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY:MM:dd:HH:mm");
