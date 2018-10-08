@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "test:dev": "testem",
+    "test:ci": "testem ci",
+    "fmt:check": "find . -name '*js' | grep -v '^./node_modules/' | xargs ./node_modules/.bin/prettier -l",
+    "fmt:format": "find . -name '*js' | grep -v '^./node_modules/' | xargs ./node_modules/.bin/prettier --write"
+  },
+  "devDependencies": {
+    "jasmine": "^3.2.0",
+    "prettier": "^1.14.3",
+    "testem": "^2.12.0"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "singleQuote": true
+  }
+}
