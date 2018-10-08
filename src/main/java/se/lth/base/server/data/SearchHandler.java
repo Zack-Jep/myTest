@@ -36,7 +36,7 @@ public class SearchHandler {
 	 * @return List of Trips.
 	 * */
 	public static List<Trip> search(String startAdress, String endAdress, 
-		double radius, TripDataAccess tripDao) {
+		double radius, String timeIntervalS, String timeIntervalE, TripDataAccess tripDao) {
 		List<Trip> matchedTrips = new ArrayList<Trip>();
 		JsonObject json = (JsonObject) getJson(startAdress);
 	    double userStartLat = ((JsonObject) json).get("lat").getAsDouble();
@@ -54,7 +54,8 @@ public class SearchHandler {
 			
 			if (compareRating(allTrips.get(i)) && checkCapacity(allTrips.get(i)) && 
 					compareStart(userStartLat, userStartLon, startLat, startLon, radius) &&
-					compareEnd(userEndLat, userEndLon, endLat, endLon)) {
+					compareEnd(userEndLat, userEndLon, endLat, endLon) && 
+					timeInInterval(allTrips.get(i).getDepartureTime(), timeIntervalS, timeIntervalE)) {
 				
 				for(int j = 0; j < matchedTrips.size(); j++) {
 					double startDistance = haversine(userStartLat, userStartLon, startLat,
