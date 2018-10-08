@@ -48,8 +48,21 @@ public class SearchHandler {
 		return null;
 	}
 	
+	
+	/** Returns true if the User's rating qualifies for the trip.
+	 * @param A trip t
+	 * @return true or false
+	 */
 	private boolean compareRating(Trip t) {
 		return User.getRating >= t.getRatingRequired;
+	}
+	
+	/** Returns true if there is capacity available for the trip.
+	 * @param A trip t
+	 * @return true or false
+	 */
+	private boolean checkCapacity(Trip t) {
+		return t.getCapacity > 0; 
 	}
 	
 	
