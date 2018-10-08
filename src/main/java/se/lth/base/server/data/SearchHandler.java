@@ -9,8 +9,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -60,6 +65,24 @@ public class SearchHandler {
 	    JsonArray jsonArray = (JsonArray) jp.parse(new InputStreamReader((InputStream) conn.getContent())); 
 	    return jsonArray.get(0);
 	}
+
+    /** Returns whether the driver's departure time lies between the passenger's time interval.
+     * @param departureTime The driver's departure time.
+     * @param intervalStart The interval's start time.
+     * @param intervalEnd The interval's end time
+     * @return true/false.
+     * */
+	private boolean timeInInterval(String departureTime, String intervalStart, String intervalEnd){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY:MM:dd:HH:mm");
+		LocalDateTime depTime = LocalDateTime.parse(departureTime, formatter);
+		LocalDateTime intStart = LocalDateTime.parse(intervalStart, formatter);
+		LocalDateTime intEnd = LocalDateTime.parse(intervalEnd, formatter);
+
+		return (depTime.isAfter(intStart) && depTime.isBefore(intEnd));
+
+
+
+    }
 	
 }
 
