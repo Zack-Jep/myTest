@@ -119,7 +119,7 @@ public class SearchHandler {
      * @param intervalEnd The interval's end time
      * @return true or false.
      * */
-	private boolean timeInInterval(String departureTime, String intervalStart, String intervalEnd){
+	private static boolean timeInInterval(String departureTime, String intervalStart, String intervalEnd){
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY:MM:dd:HH:mm");
 		LocalDateTime depTime = LocalDateTime.parse(departureTime, formatter);
 		LocalDateTime intStart = LocalDateTime.parse(intervalStart, formatter);
