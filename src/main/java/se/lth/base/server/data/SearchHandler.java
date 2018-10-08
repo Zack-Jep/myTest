@@ -32,7 +32,7 @@ public class SearchHandler {
 	 * @return List of Trips.
 	 * */
 	public static List<Trip> search(String startAdress, 
-			double radius, TripDataAccess tripDao) {
+		double radius, TripDataAccess tripDao) {
 		JsonObject json = (JsonObject) getJson(startAdress);
 	    double userLat = ((JsonObject) json).get("lat").getAsDouble();
 	    double userLon = ((JsonObject) json).get("lon").getAsDouble();
@@ -47,6 +47,11 @@ public class SearchHandler {
 		}
 		return null;
 	}
+	
+	private boolean compareRating(Trip t) {
+		return User.getRating >= t.getRatingRequired;
+	}
+	
 	
 	private static JsonElement getJson(String adress) throws IOException {
 		String urlString = "https://nominatim.openstreetmap.org/search?q="
