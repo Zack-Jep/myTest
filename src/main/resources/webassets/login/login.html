@@ -2,24 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>BASE</title>
+    <title>Logga in | Samåkning</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="login.css">
 </head>
 <body class="text-center">
 <form class="form-signin" id="login-form">
-    <img class="mb-4" src="/logo.svg" alt="" width="160" height="100">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <input id="username" type="text" class="form-control" placeholder="Username" required>
-    <input id="password" type="password" class="form-control" placeholder="Password" required>
-    <div class="checkbox mb-3">
-        <label>
-            <input id="remember" type="checkbox">Remember me
-        </label>
-    </div>
-    <button id="login" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <h1 class="h3 mb-3 font-weight-normal" style="color:#FFFFFF">Logga in</h1>
+    <input id="username" type="text" class="form-control" placeholder="Användarnamn" required>
+    <input id="password" type="password" class="form-control" placeholder="Lösenord" required>
+    <button id="login" class="btn btn-lg btn-block" type="submit">Logga in</button>
+    <button id="register" class="btn btn-xs btn-block" type="submit">Registrera ny användare</button>
+    <button id="password-forgotten" class="btn btn-xs btn-block" type="submit">Glömt löseord?</button>
+    
 </form>
-<script src="/rest.js"></script>
+
 <script src="login.js"></script>
 <script type="application/javascript">
     base.loginController.initOnLoad();

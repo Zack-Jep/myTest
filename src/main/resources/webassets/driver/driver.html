@@ -1,0 +1,44 @@
+<h1>Skapa resa</h1>
+<p> Här kan du skapa en ny resa genom att fylla i detaljerna nedan.</p>
+<form id="user-form">
+    <div class="form-group row show-edit">
+        <label class="col-md-2 col-form-label" for="departure-time">Avgångstid:</label>
+        <div class="col-md-10">
+            <input type="time" class="form-control" id="departure-time">
+            <small id="departure-time-help" class="form-text text-muted">Ange tid i 24h format, t.ex "14:37".
+            </small>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="departure-location">Avgångsplats:</label>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="departure-location">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="destination">Destination:</label>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="destination">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="capacity">Kapacitet:</label>
+        <div class="col-md-10">
+            <input type="number" class="form-control" id="capacity" min="1" max="8">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="minimum-score">Lägsta erfodrade betyg:</label>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col">
+                    <input type="number" class="form-control" id="minimum-score" min="0" max="5">
+                </div>
+                <div class="show-edit col-md-2">
+                    <button id="create-trip" class="w-100 btn btn-secondary">Skapa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
